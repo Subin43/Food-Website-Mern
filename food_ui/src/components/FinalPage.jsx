@@ -1,8 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function FinalPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const cartItems = location.state?.cartItems || []; 
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
@@ -17,9 +19,9 @@ export default function FinalPage() {
           </button>
           <button
             className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300"
-            onClick={() => navigate('/cart')}
+            onClick={() => navigate('/my-orders', { state: { cartItems } })}
           >
-            Cart
+            My Orders
           </button>
           <button
             className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300"
