@@ -73,7 +73,7 @@ const Cart = ({ cartItems, addToCart, removeFromCart }) => {
         {Loggedin ? (
           <button
             className='m-9 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700'
-            onClick={() => navigate("/payment", { state: { itemsTotal } })}
+            onClick={() => navigate("/payment", { state: { itemsTotal, cartItems } })}
           >
             Buy Now
           </button>
