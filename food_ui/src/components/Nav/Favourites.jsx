@@ -1,29 +1,12 @@
-// Order.jsx
+import React from 'react';
+import { FaRegHeart } from "react-icons/fa";
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-export default function Order() {
-  const [orders, setOrders] = useState([]);
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
-  const fetchOrders = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/orders');
-      setOrders(response.data);
-    } catch (error) {
-      console.error('Error fetching orders:', error);
-    }
-  };
-
+const Favorites = ({ favorites, removeFromFavorites }) => {
   return (
     <div className='p-4 m-5 items-center'>
-      <h2 className='text-2xl font-semibold mb-4'>Orders</h2>
+      <h2 className='text-2xl font-semibold mb-4'>Favorites</h2>
       <div className='grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4'>
-        {orders.map((item) => (
+        {favorites.map((item) => (
           <div
             key={item._id}
             className='border shadow-lg rounded-lg hover:scale-105 duration-300 relative'
@@ -34,11 +17,12 @@ export default function Order() {
                 alt={item.name}
                 className='w-full h-[200px] object-cover rounded-t-lg'
               />
-              <span
+              <FaRegHeart
+                size={24}
+                color='red'
                 className='absolute top-2 right-2 cursor-pointer'
-              >
-                ❤️
-              </span>
+                onClick={() => removeFromFavorites(item)}
+              />
             </div>
             <div className='flex justify-between px-2 py-4'>
               <p className='font-bold'>{item.name}</p>
@@ -56,4 +40,6 @@ export default function Order() {
       </div>
     </div>
   );
-}
+};
+
+export default Favorites;

@@ -2,25 +2,25 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+  apiKey: 'AIzaSyCg0pTwcaqlPdZUjRQucEGeYBTeWUew84g',
+  authDomain: 'food-app-authentication.firebaseapp.com',
+  projectId: 'food-app-authentication',
+  storageBucket: 'food-app-authentication.appspot.com',
+  messagingSenderId: '496752014032',
+  appId: '1:496752014032:web:185ad23f8a1f199bac64d5',
+  measurementId: 'G-X3FSH0FK9D',
 };
 
 // Log the environment variable to verify it is being read correctly
-console.log('API Key:', firebaseConfig.apiKey);
-console.log('Auth Domain:', firebaseConfig.authDomain);
-console.log('Project ID:', firebaseConfig.projectId);
-console.log('Storage Bucket:', firebaseConfig.storageBucket);
-console.log('Messaging Sender ID:', firebaseConfig.messagingSenderId);
-console.log('App ID:', firebaseConfig.appId);
-console.log('Measurement ID:', firebaseConfig.measurementId);
-const hi = process.env.REACT_APP_HI;
-console.log(hi); // Should output "HelloFromEnv"
+// console.log('API Key:', firebaseConfig.apiKey);
+// console.log('Auth Domain:', firebaseConfig.authDomain);
+// console.log('Project ID:', firebaseConfig.projectId);
+// console.log('Storage Bucket:', firebaseConfig.storageBucket);
+// console.log('Messaging Sender ID:', firebaseConfig.messagingSenderId);
+// console.log('App ID:', firebaseConfig.appId);
+// console.log('Measurement ID:', firebaseConfig.measurementId);
+// const hi = 'Hello'; // Replace the process.env.REACT_APP_HI value directly
+// console.log(hi); // Should output "Hello"
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

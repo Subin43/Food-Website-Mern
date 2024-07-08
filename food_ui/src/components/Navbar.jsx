@@ -10,14 +10,19 @@ import { FaUser } from "react-icons/fa";
 import { BiSolidOffer } from "react-icons/bi";
 import { FaSignOutAlt } from "react-icons/fa";
 import { CartContext } from "../Menu/CartProvider";
-
+import { MdFavorite } from "react-icons/md";
 
 export const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const [searchResults, setSearchResults] = useState("");
   const location = useLocation();
   const Loggedin = location.state?.isLoggedin || false;
   const { cart } = useContext(CartContext);
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setSearchResults(e.target.value);
+  };
 
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
@@ -39,21 +44,24 @@ export const Navbar = () => {
           className="bg-transparent p-2 w-full focus:outline-none"
           type="text"
           placeholder="Search foods"
+          value={searchResults}
+          onChange={handleChange}
         />
       </div>
+
       {Loggedin ? (
-        <div className="flex ">
+        <div className="flex">
           <Link to="/offer">
-            <button className="bg-black text-white hidden md:flex items-center py-2 rounded-full hover:scale-110  duration-300">
+            <button className="bg-black text-white hidden md:flex items-center py-2 rounded-full hover:scale-110 duration-300">
               <BiSolidOffer size={20} className="mr-2" />
               New Offer
             </button>
           </Link>
         </div>
       ) : (
-        <div className="flex ">
+        <div className="flex">
           <Link to="/login">
-            <button className="bg-black text-white hidden md:flex items-center py-2 rounded-full hover:scale-110  duration-300">
+            <button className="bg-black text-white hidden md:flex items-center py-2 rounded-full hover:scale-110 duration-300">
               <FaUser size={20} className="mr-2" />
               Sign In
             </button>
@@ -62,18 +70,16 @@ export const Navbar = () => {
       )}
 
       {/* Cart button */}
-      
-        <button className="bg-black text-white hidden md:flex items-center py-2 rounded-full hover:scale-110  duration-300"
-          onClick={()=>navigate("/cart",{ state: { isLoggedin: true } })}>
-          <BsFillCartFill size={20} className="mr-2" /> Cart ({cart.length})
-        </button>
-      
+      <button
+        className="bg-black text-white hidden md:flex items-center py-2 rounded-full hover:scale-110 duration-300"
+        onClick={() => navigate("/cart", { state: { isLoggedin: true } })}
+      >
+        <BsFillCartFill size={20} className="mr-2" /> Cart ({cart.length})
+      </button>
 
       {/* Mobile Menu */}
-      {nav ? (
+      {nav && (
         <div className="bg-black/80 fixed w-full h-screen z-10 top-0 left-0"></div>
-      ) : (
-        ""
       )}
 
       {/* Side drawer menu */}
@@ -99,12 +105,19 @@ export const Navbar = () => {
                 <TbTruckDelivery size={25} className="mr-4" /> Orders
               </li>
             </Link>
-            <li className="text-xl py-4 flex cursor-pointer">
-              <FaWallet size={25} className="mr-4" /> Wallet
-            </li>
+            <Link to="wallet">
+              <li className="text-xl py-4 flex cursor-pointer">
+                <FaWallet size={25} className="mr-4" /> Wallet
+              </li>
+            </Link>
             <Link to="/help">
               <li className="text-xl py-4 flex cursor-pointer">
                 <MdHelp size={25} className="mr-4" /> Help
+              </li>
+            </Link>
+            <Link to="/favourites">
+              <li className="text-xl py-4 flex cursor-pointer">
+                <MdFavorite size={25} className="mr-4" /> Favourite
               </li>
             </Link>
             <Link to="/signout">

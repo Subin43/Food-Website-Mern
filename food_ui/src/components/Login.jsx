@@ -47,7 +47,7 @@ export default function Login() {
       setUser(userData);
 
       // Optional: Store user data in state or context
-      console.log('User Data:', userData);
+     // console.log('User Data:', userData);
       
       // enqueueSnackbar("Logined Successfully!", { variant: 'success' });
       navigate('/', { state: { isLoggedin: true } }); // Redirect to dashboard or another protected route

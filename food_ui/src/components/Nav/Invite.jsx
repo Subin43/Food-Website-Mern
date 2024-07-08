@@ -43,7 +43,7 @@ export default function Invite() {
     <div className="p-6 m-6">
       <FaArrowLeft
         size={40}
-        color="green"
+        color="orange"
         onClick={handleBack}
         style={{ cursor: "pointer" }}
       />

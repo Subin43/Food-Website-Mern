@@ -33,11 +33,11 @@ export const HeadlineCards = () => {
         {/* Overlay */}
         <div className='absolute w-full h-full bg-black/50 rounded-xl transition duration-300 group-hover:bg-black/70'></div>
         <div className='absolute w-full h-full flex flex-col justify-between text-white p-4'>
-          <p className='font-bold text-2xl'>Famous Restaurants</p>
+          <p className='font-bold text-2xl'>Starters Special</p>
           <p>Added Daily</p>
           <button
             className='border-white bg-white text-black self-start group-hover:bg-gray-200 transition duration-300'
-            onClick={() => navigate("/resturant")}
+            onClick={() => navigate("/starters")}
           >
             Order Now
           </button>
@@ -46,7 +46,7 @@ export const HeadlineCards = () => {
           className='max-h-[160px] md:max-h-[200px] w-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-105'
           src='https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJicXxlbnwwfDB8MHx8&auto=format&fit=crop&w=800&q=60'
           alt='/'
-          onClick={() => navigate("/resturant")}
+          onClick={() => navigate("/starters")}
         />
       </div>
       {/* Card */}

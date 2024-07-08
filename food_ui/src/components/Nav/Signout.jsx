@@ -1,25 +1,29 @@
-// src/components/Signout.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AiOutlineClose } from "react-icons/ai";
 import axios from 'axios';
-import { useAuth } from '../../Menu/AuthProvider'; // Import the useAuth hook
+import { useAuth } from '../../Menu/AuthProvider';
+import { getAuth, signOut } from "firebase/auth";
 
 export default function Signout() {
   const [clicked, setClicked] = useState(false);
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { user, setUser } = useAuth(); // Get the user and setUser functions from the context
+  const { user, setUser } = useAuth();
 
   const handleSignout = async () => {
+    console.log(`Attempting to sign out user with ID: ${id}`);
     try {
-      await axios.delete(`http://localhost:5000/user/delete/${user.id}`);
-      console.log(user.id);
+      await axios.delete(`http://localhost:5000/user/delete/${id}`);
+      const auth = getAuth();
+      await signOut(auth);
+
       setClicked(true);
-      setUser(null); // Clear user data from context
+      setUser(null);
       navigate("/", { state: { isLoggedin: false } });
     } catch (error) {
-      console.log('error', error.message);
-      alert('invalid')
+      console.log('Error during signout:', error.message);
+      alert('Invalid');
     }
   };
 

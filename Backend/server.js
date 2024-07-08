@@ -3,6 +3,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
+const amountRoutes = require("./routes/amountRoutes");
+const foodRoutes = require("./routes/foodRoutes")
 
 dotenv.config();
 
@@ -26,6 +28,8 @@ app.options('*', cors(corsConfig)); // Allow CORS preflight for all routes
 
 // Routes
 app.use('/user', userRoutes);
+app.use('/food',foodRoutes);
+app.use('/amount',amountRoutes);
 
 mongoose
   .connect(MongoUrl)
