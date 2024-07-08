@@ -7,12 +7,12 @@ import Cash from './Cash';
 export default function Payment() {
   const userId = '6685595708ec0e322020ddcf';
   const [amount, setAmount] = useState('');
-  const [amountToPay, setAmountToPay] = useState('350');
   const location = useLocation();
   const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
   
   let cartAmount = location.state?.itemsTotal + 18 || 0; // Get the passed itemsTotal
+  const cartItems = location.state?.cartItems || []; // Get the passed cartItems
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -20,7 +20,6 @@ export default function Payment() {
         const response = await axios.get(`http://localhost:5000/amount/${userId}`);
         const currentBalance = response.data.amount;
         setAmount(currentBalance);
-        setAmountToPay(cartAmount); // Set the cartAmount as the amount to pay initially
       } catch (error) {
         console.error('Error fetching balance:', error);
       }
@@ -32,12 +31,12 @@ export default function Payment() {
   const handleWalletPay = () => {
     if (amount < cartAmount) {
       alert(`You don't have enough balance to pay`);
-      return; // Stop further execution if the balance is insufficient
+      return; 
     }
     const pay = amount - cartAmount;
     setAmount(pay);
-    setAmountToPay(0); // Clear the amount to pay
-    navigate("/final");
+
+    navigate("/final", { state: { cartItems } });
   };
 
   const handleClick = () => {
